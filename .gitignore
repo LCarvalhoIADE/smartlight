@@ -1,0 +1,31 @@
+
+# PlatformIO
+.pio/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Credenciais e configurações privadas
+.env
+.env.*
+!.env.example
+
+# JavaScript
+node_modules/
+dist/
+
+# Bases de dados locais
+*.db
+*.sqlite
+*.sqlite3
+
+# Modelos e datasets locais
+ai/data/
+ai/models/
+
+# Ficheiros temporários
+*.log
+*.tmp
