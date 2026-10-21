@@ -1,9 +1,9 @@
 # Licenciatura de Engenharia Informática - IADE - 2026/2027
  ---------------------------------------------------------------------------
-**Projeto :** PBL (Projeto Grupo 4)
-**Disciplina :** 
-**Professores :** 
-**Autores :** Diego Silva | Francisco Maia | Luis Carvalho | Ricardo Siqueira
+- **Projeto:** PBL (Projeto Grupo 4)
+- **Disciplina:** [Nome da Disciplina]
+- **Professores:** [Nome dos Professores]
+- **Autores:** Diego Silva | Francisco Maia | Luis Carvalho | Ricardo Siqueira
 
 # SmartLight AI
 
