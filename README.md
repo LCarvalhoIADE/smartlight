@@ -25,7 +25,7 @@ O SmartLight AI é um projeto de iluminação inteligente para casa. Pretendemos
 
 ## Arquitetura
 
-![Arquitetura](Documentacao/1ª%20Entrega/Img/Arquitetura.png) 
+![Arquitetura](Documentacao/1aEntrega/Img/Arquitetura.png) 
 
 O controlo da iluminação é feito no próprio nó, sem depender do Wi-Fi ou do servidor. Quando não há ligação à Internet, as leituras ficam guardadas no nó e são enviadas quando a ligação é restabelecida.
 
