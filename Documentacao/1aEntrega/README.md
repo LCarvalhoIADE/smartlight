@@ -132,7 +132,7 @@ O utilizador de referência é uma pessoa sem conhecimentos técnicos que consul
 
 ## 6. Arquitetura da solução (provisória)
 
-![Arquitetura da solução](Img/arquitetura.png)
+![Arquitetura da solução](Img/Arquitetura.png)
 
 ### Nós e comunicação
 
