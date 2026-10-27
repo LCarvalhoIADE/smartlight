@@ -216,7 +216,7 @@ gantt
 | Área | Responsável | Apoio |
 |---|---|---|
 | Maquete e firmware dos nós | Todos | |
-| Servidor, API e base de dados | | |
+| Servidor, API e base de dados |Luís Carvalho | |
 | Dashboard | | |
 | Módulo de IA | | |
 | Infraestrutura e segurança | | |
