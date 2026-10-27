@@ -12,7 +12,7 @@ Unidades curriculares: Sistemas Distribuídos, Computação Física e IoT, Intel
 
 Palavras-chave: IoT, ESP32, iluminação inteligente, sistemas distribuídos, REST, MySQL, previsão de consumo
 
-Repositório: https://github.com/LCarvalhoIADE/smartlight
+Repositório: https://github.com/LCarvalhoIADE/smartlight_ai
 
 1.ª entrega, 27 de outubro de 2026
 
