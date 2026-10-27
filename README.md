@@ -38,6 +38,4 @@ O dashboard consulta os dados através da API. Para gerar previsões de consumo,
 - Servidor: PHP 8 e MySQL, em Docker
 - IA: Python, com pandas e scikit-learn
 
-## Estrutura do repositório
 
-## Documentação
