@@ -217,9 +217,9 @@ gantt
 |---|---|---|
 | Maquete e firmware dos nós | Todos | |
 | Servidor, API e base de dados | luís Carvalho | |
-| Dashboard | | |
-| Módulo de IA | | |
-| Infraestrutura e segurança | | |
+| Dashboard |Francisco Maia | |
+| Módulo de IA |Diego Silva | |
+| Infraestrutura e segurança |Ricardo Siqueira |Francisco Maia |
 | Requisitos, UML e testes | Todos | |
 
 A distribuição será revista ao longo do projeto.
