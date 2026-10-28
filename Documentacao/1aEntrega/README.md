@@ -6,7 +6,7 @@ Universidade Europeia, IADE, Faculdade de Design, Tecnologia e Comunicação
 
 Licenciatura em Engenharia Informática, 5.º semestre, 2026/2027
 
-Grupo g04: Diego Silva, Francisco Maia, Luís Carvalho e Ricardo Siqueira
+Grupo g04: Diego Silva (20241346), Francisco Maia (20241284), Luís Carvalho (20240451) e Ricardo Siqueira (20241613)
 
 Unidades curriculares: Sistemas Distribuídos, Computação Física e IoT, Inteligência Artificial e Engenharia de Software
 
