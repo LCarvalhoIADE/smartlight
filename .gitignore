@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Credenciais e configurações privadas
+.env
+.env.*
+!.env.example
+config.h
+*.sync-conflict-*
+
+# PlatformIO
+.pio/
+
+# JavaScript
+node_modules/
+dist/
+
+# Bases de dados locais
+*.db
+*.sqlite
+*.sqlite3
+
+# Modelos locais
+/ai/models/
+
+# Dados locais da IA: guardar apenas os dois .gitkeep
+/ai/data/*
+!/ai/data/raw/
+!/ai/data/processed/
+
+/ai/data/raw/*
+!/ai/data/raw/.gitkeep
+
+/ai/data/processed/*
+!/ai/data/processed/.gitkeep
+
+# Ficheiros temporários
+*.log
+*.tmp
