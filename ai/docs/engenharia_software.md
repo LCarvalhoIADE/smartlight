@@ -23,7 +23,7 @@ alinhados com os requisitos gerais do projeto.
 | RF-IA-03 | Rejeitar duplicados por no_id, divisao e ts | Implementado |
 | RF-IA-04 | Ordenar leituras e acrescentar data_utc | Implementado |
 | RF-IA-05 | Exportar as leituras preparadas para CSV | Implementado |
-| RF-IA-06 | Identificar falhas de recolha e produzir resumos por hora | Planeado |
+| RF-IA-06 | Sinalizar possíveis interrupções na recolha e produzir resumos por hora | Parcial: análise de intervalos implementada; resumos por hora pendentes |
 | RF-IA-07 | Obter meteorologia e associá-la por localização e hora | Planeado |
 | RF-IA-08 | Comparar referência do dia anterior, Regressão Linear e Random Forest | Planeado |
 | RF-IA-09 | Avaliar previsões com MAE | Planeado |
@@ -51,19 +51,28 @@ ainda precisam de ser definidos e justificados.
 
 ## 4. Arquitetura atual
 
-Entrada: ai/data/raw/no3_amostra.json.
+Entrada local:
+- ai/data/raw/no3_amostra.json
 
-Processamento: ai/src/preparar_dados.py.
+Preparação:
+- ai/src/preparar_dados.py
+- Valida e ordena as leituras, acrescentando data_utc.
+- Produz ai/data/processed/no3_preparado.csv.
+- O CSV é substituído em cada execução.
 
-Saída: ai/data/processed/no3_preparado.csv.
+Análise de qualidade:
+- ai/src/analisar_qualidade.py
+- Reutiliza a função preparar.
+- Apresenta totais, período em UTC, nulos e intervalos por nó e divisão.
+- Sinaliza intervalos superiores a 30 segundos, com limite configurável.
+- Apresenta os resultados no terminal, sem gerar outro ficheiro.
 
-Testes: ai/tests/test_preparar_dados.py.
+Testes:
+- ai/tests/test_preparar_dados.py
+- ai/tests/test_analisar_qualidade.py
 
-A função preparar valida e ordena os registos.
-A função main lê o JSON, chama preparar e escreve o CSV.
-
-O CSV é substituído em cada execução.
-O JSON original não é alterado.
+Ambos os scripts preservam o JSON original.
+A validação permanece restrita ao nó no3.
 
 ## 5. Modelo em V e rastreabilidade
 
@@ -74,17 +83,34 @@ componente são relacionadas com testes unitários.
 |---|---|---|
 | RF-IA-01 | Execução com JSON real de 50 leituras | Execução bem-sucedida |
 | RF-IA-02 | Oito casos de valores inválidos, campo em falta e lista vazia | Testes aprovados |
-| RF-IA-03 | Teste de registos duplicados | Teste aprovado |
-| RF-IA-04 | Testes de ordenação e conversão para UTC | Testes aprovados |
+| RF-IA-03 | Rejeição de duplicados na preparação e na análise | Testes aprovados |
+| RF-IA-04 | Ordenação e conversão para UTC | Testes aprovados |
 | RF-IA-05 | Execução do script e geração do CSV | Verificação manual |
-| RNF-IA-02 | Comparação da entrada antes e depois da função preparar | Teste aprovado |
+| RF-IA-06 | Resumo, intervalos, fronteira do alerta, separação entre divisões e configuração do limite | Testes aprovados; agregação por hora pendente |
+| RNF-IA-02 | Preservação da entrada nas funções preparar e analisar | Testes aprovados |
 
-Resultado comunicado: 13 testes unitários aprovados.
+Resultado: 26 testes unitários aprovados.
+- 13 de preparação dos dados.
+- 13 de análise de qualidade.
+
+Estas contagens incluem os casos dos testes parametrizados.
 
 Comando executado na raiz do repositório:
-python -m pytest ai/tests/test_preparar_dados.py -v
 
-A contagem de 13 inclui os oito casos do teste parametrizado.
+```powershell
+python -m pytest ai/tests -v
+```
+
+Validação manual da análise de qualidade:
+- 50 leituras do nó no3, divisão sala.
+- Período: 2026-10-26T23:18:09+00:00 a 2026-10-26T23:30:31+00:00.
+- Intervalos entre leituras: 15–16 segundos.
+- 50 valores nulos em luz_pct, esperados com o sensor digital.
+- Zero intervalos superiores a 30 segundos.
+
+A ausência de alertas aplica-se apenas à amostra analisada.
+Não demonstra que todo o histórico do servidor está completo.
+
 Os testes não verificam ainda a integração com APIs,
 a precisão física dos sensores ou a qualidade das previsões.
 

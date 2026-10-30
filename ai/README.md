@@ -17,11 +17,11 @@ respeitando a ordem temporal dos dados de treino e teste.
 
 - Ambiente Python e dependências configurados.
 - Amostra local de 50 leituras reais do nó no3.
-- Script de validação e preparação dos dados implementado.
+- Validação e preparação dos dados implementadas.
 - CSV gerado com as leituras ordenadas cronologicamente.
-- 13 testes automáticos aprovados.
+- Análise de nulos, intervalos e possíveis interrupções implementada.
+- 26 testes automáticos aprovados: 13 de preparação e 13 de qualidade.
 - Sem cálculo de consumo ou treino de modelos nesta etapa.
-
 ## Organização
 
 - data/raw/: dados originais, apenas locais.
@@ -39,13 +39,13 @@ ser publicados no Git.
 Executar os comandos na raiz do repositório,
 com o ambiente virtual ai/.venv ativo.
 
-Preparar a amostra:
+Preparar a amostra e gerar o CSV:
 
 ```powershell
 python ai/src/preparar_dados.py
 ```
 
-Executar os testes:
+Executar todos os testes da IA:
 
 ```powershell
 python -m pytest ai/tests/test_preparar_dados.py -v
@@ -56,14 +56,18 @@ python -m pytest ai/tests/test_preparar_dados.py -v
 Entrada local:
 data/raw/no3_amostra.json
 
-Saída local:
-data/processed/no3_preparado.csv
+Saída da preparação:
+ai/data/processed/no3_preparado.csv
 
-O script preserva o JSON original, valida os campos obrigatórios
-e algumas regras de valores, rejeita duplicados pelo conjunto
-(no_id, divisao, ts), ordena as leituras e acrescenta data_utc.
+O script de preparação preserva o JSON original, valida os campos
+obrigatórios e algumas regras de valores, rejeita duplicados pelo
+conjunto (no_id, divisao, ts), ordena as leituras e acrescenta data_utc.
 
 O CSV de saída é substituído em cada execução.
+
+A análise de qualidade lê o JSON original e apresenta
+o resumo no terminal, sem criar outro ficheiro.
+
 
 ## Limitações atuais
 
@@ -74,6 +78,10 @@ O CSV de saída é substituído em cada execução.
 - Ainda não existem medições energéticas nesta amostra.
 - Ainda não existe agregação por hora ou integração meteorológica.
 - Os testes verificam regras do código, não a precisão dos sensores.
+- A validação está atualmente restrita ao nó no3.
+- Intervalos superiores a 30 segundos geram alertas configuráveis,
+  mas não confirmam perda de dados.
+- A análise cobre apenas os intervalos internos da amostra.
 
 ## Implementação e testes
 
@@ -86,6 +94,12 @@ Nesta componente, os testes unitários verificam:
 - Rejeição de duplicados.
 - Rejeição de determinados valores inválidos.
 - Rejeição de campos em falta e de uma lista vazia.
+- Resumo de qualidade e contagem de nulos.
+- Separação dos intervalos por divisão.
+- Tratamento de grupos com uma única leitura.
+- Fronteira dos alertas: 30 segundos sem alerta e 31 com alerta.
+- Configuração do limite e rejeição de limites inválidos.
+- Preservação da entrada durante a análise.
 
 ## Próximas etapas
 
