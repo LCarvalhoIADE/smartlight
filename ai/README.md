@@ -20,7 +20,8 @@ respeitando a ordem temporal dos dados de treino e teste.
 - Validação e preparação dos dados implementadas.
 - CSV gerado com as leituras ordenadas cronologicamente.
 - Análise de nulos, intervalos e possíveis interrupções implementada.
-- 26 testes automáticos aprovados: 13 de preparação e 13 de qualidade.
+- 36 testes automáticos aprovados: 13 de preparação, 13 de qualidade e 10 de agregação.
+- Agregação por hora UTC e divisão implementada.
 - Sem cálculo de consumo ou treino de modelos nesta etapa.
 ## Organização
 
@@ -51,6 +52,12 @@ Executar todos os testes da IA:
 python -m pytest ai/tests/test_preparar_dados.py -v
 ```
 
+Gerar os resumos por hora:
+
+```powershell
+python -m ai.src.agregar_por_hora
+```
+
 ## Entrada e saída
 
 Entrada local:
@@ -68,6 +75,11 @@ O CSV de saída é substituído em cada execução.
 A análise de qualidade lê o JSON original e apresenta
 o resumo no terminal, sem criar outro ficheiro.
 
+Saída da agregação:
+ai/data/processed/no3_por_hora.csv
+
+O CSV horário é substituído em cada execução.
+As médias representam apenas as leituras disponíveis.
 
 ## Limitações atuais
 
@@ -76,7 +88,11 @@ o resumo no terminal, sem criar outro ficheiro.
 - Os valores nulos são preservados, ficando vazios no CSV.
 - led_pct indica a intensidade comandada ao LED, não energia medida.
 - Ainda não existem medições energéticas nesta amostra.
-- Ainda não existe agregação por hora ou integração meteorológica.
+- Ainda não existe integração meteorológica.
+- As médias horárias não são ponderadas pelo tempo.
+- Horas sem leituras não são preenchidas.
+- Um resumo horário não comprova que a hora está completa.
+- A proporção de leituras com presença não representa o tempo exato de ocupação.
 - Os testes verificam regras do código, não a precisão dos sensores.
 - A validação está atualmente restrita ao nó no3.
 - Intervalos superiores a 30 segundos geram alertas configuráveis,

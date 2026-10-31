@@ -74,6 +74,17 @@ Testes:
 Ambos os scripts preservam o JSON original.
 A validação permanece restrita ao nó no3.
 
+Agregação horária:
+- ai/src/agregar_por_hora.py
+- Reutiliza a validação da função preparar.
+- Agrupa por nó, divisão e hora UTC.
+- Calcula contagens, proporção de presença e médias de LED e luminosidade.
+- Preserva luminosidade nula quando não existem valores disponíveis.
+- Produz ai/data/processed/no3_por_hora.csv.
+
+Testes da agregação:
+- ai/tests/test_agregar_por_hora.py
+
 ## 5. Modelo em V e rastreabilidade
 
 O grupo adotou o Modelo em V. Nesta etapa, as regras da
@@ -86,12 +97,13 @@ componente são relacionadas com testes unitários.
 | RF-IA-03 | Rejeição de duplicados na preparação e na análise | Testes aprovados |
 | RF-IA-04 | Ordenação e conversão para UTC | Testes aprovados |
 | RF-IA-05 | Execução do script e geração do CSV | Verificação manual |
-| RF-IA-06 | Resumo, intervalos, fronteira do alerta, separação entre divisões e configuração do limite | Testes aprovados; agregação por hora pendente |
+| RF-IA-06 | Resumo de qualidade, intervalos, fronteira do alerta, configuração do limite, médias horárias, separação por hora/dia/divisão e tratamento de nulos | Testes aprovados; análise de qualidade e agregação horária implementadas |
 | RNF-IA-02 | Preservação da entrada nas funções preparar e analisar | Testes aprovados |
 
-Resultado: 26 testes unitários aprovados.
+Resultado: 36 testes unitários aprovados.
 - 13 de preparação dos dados.
 - 13 de análise de qualidade.
+- 10 de agregação
 
 Estas contagens incluem os casos dos testes parametrizados.
 
@@ -116,6 +128,16 @@ a precisão física dos sensores ou a qualidade das previsões.
 
 Os testes de integração, sistema e aceitação serão definidos
 à medida que as interfaces e os critérios forem acordados.
+
+Validação manual da agregação:
+- 50 leituras originaram um resumo para 2026-10-26T23:00:00+00:00.
+- Intervalo entre primeira e última leitura: 742 segundos.
+- Proporção de leituras com presença: 44%.
+- Intensidade LED média: 44%.
+- Luminosidade percentual média: sem dados.
+
+Estes resultados descrevem a amostra, não uma hora completa.
+Não foi calculado consumo energético.
 
 ## 6. Decisões técnicas
 
